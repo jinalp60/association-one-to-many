@@ -1,0 +1,50 @@
+DB: hospitals
+---------------------------------------------------------------------------------------
+
+-- Table: public.doctors
+
+-- DROP TABLE public.doctors;
+
+CREATE TABLE public.doctors
+(
+    id integer NOT NULL DEFAULT nextval('doctors_id_seq'::regclass),
+    "doctorId" character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    "firstName" character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    "createdAt" date,
+    "updatedAt" date,
+    CONSTRAINT id_pkey PRIMARY KEY ("doctorId")
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.doctors
+    OWNER to postgres;
+
+--------------------------------------------------------------------------------------------------
+
+-- Table: public.specialities
+
+-- DROP TABLE public.specialities;
+
+CREATE TABLE public.specialities
+(
+    id integer NOT NULL DEFAULT nextval('specialities_id_seq'::regclass),
+    "doctorId" character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    "specialitySubject" character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    "createdAt" date,
+    "updatedAt" date,
+    CONSTRAINT specialities_pkey PRIMARY KEY (id),
+    CONSTRAINT specialities_doctorid_fkey FOREIGN KEY ("doctorId")
+        REFERENCES public.doctors ("doctorId") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.specialities
+    OWNER to postgres;
