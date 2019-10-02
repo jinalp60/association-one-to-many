@@ -12,7 +12,6 @@ module.exports = function(sequelize) {
     try {
       await specialities.create(req.body);
     } catch (err) {
-      console.log(err);
       message = err.message;
     }
 

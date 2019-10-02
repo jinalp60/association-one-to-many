@@ -1,6 +1,5 @@
 "use strict";
 const Sequelize = require("sequelize");
-const speciality = require("./speciality");
 
 module.exports = sequelize => {
   const doctors = sequelize.define(
@@ -15,7 +14,6 @@ module.exports = sequelize => {
   );
   doctors.associate = () => {
     // associations can be defined here
-    doctors.hasMany(speciality);
   };
   return doctors;
 };
